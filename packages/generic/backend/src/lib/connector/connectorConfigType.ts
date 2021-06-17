@@ -13,5 +13,8 @@ type connectorConfigType = {
     sourceIds: number[],
   ) => Promise<documentType[]>;
   updateDocumentsLoadedStatus: (documents: documentType[]) => Promise<void>;
+  updateDocumentsToBeTreatedStatus: (
+    documents: documentType[],
+  ) => Promise<void>;
   mapCourtDecisionToDocument: (courtDecision: decisionType) => documentType;
 };
