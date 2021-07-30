@@ -1,10 +1,8 @@
-import { settingsModule } from '@label/core';
 import axios from 'axios';
+import { settingsModule } from '@label/core';
 import { nlpApiType, nlpAnnotationsType } from './nlpApiType';
 
-export { nlpApi };
-
-const NLP_API_BASE_URL = 'http://127.0.0.1:8081';
+export { buildNlpApi };
 
 type nlpRequestParametersType = {
   idDocument: number;
@@ -14,31 +12,26 @@ type nlpRequestParametersType = {
   categories?: string[];
 };
 
-const nlpApi: nlpApiType = {
-  async fetchNlpAnnotations(settings, document) {
-    const filteredSettings = settingsModule.lib.computeFilteredSettings(
-      settings,
-      document.decisionMetadata.categoriesToOmit,
-      document.decisionMetadata.additionalTermsToAnnotate,
-    );
-    const nlpRequestParameters: nlpRequestParametersType = {
-      idDocument: document.documentNumber,
-      text: document.text,
-      source: document.source,
-      meta: document.metadata !== '' ? document.metadata : undefined,
-      categories: settingsModule.lib.getCategories(filteredSettings, [
-        'alwaysVisible',
-        'annotable',
-      ]),
-    };
+function buildNlpApi(nlpApiBaseUrl: string): nlpApiType {
+  return {
+    async fetchNlpAnnotations(settings, document) {
+      const filteredSettings = settingsModule.lib.computeFilteredSettings(settings, document.decisionMetadata.categoriesToOmit, document.decisionMetadata.additionalTermsToAnnotate)
+      const nlpRequestParameters: nlpRequestParametersType = {
+        idDocument: document.documentNumber,
+        text: document.text,
+        source: document.source,
+        meta: document.metadata !== '' ? document.metadata : undefined,
+        categories: settingsModule.lib.getCategories(filteredSettings, ['alwaysVisible', 'annotable']),
+      };
 
-    const response = await axios({
-      data: nlpRequestParameters,
-      headers: { 'Content-Type': 'application/json' },
-      method: 'post',
-      url: `${NLP_API_BASE_URL}/ner`,
-    });
+      const response = await axios({
+        data: nlpRequestParameters,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `${nlpApiBaseUrl}/ner`,
+      });
 
-    return response.data as nlpAnnotationsType;
-  },
-};
+      return response.data as nlpAnnotationsType;
+    },
+  };
+}
