@@ -1,5 +1,4 @@
-import { settingsModule, settingsType } from '@label/core';
-import { environmentType } from '../lib/environment';
+import { environmentType, settingsModule, settingsType } from '@label/core';
 import { settingsLoader } from '../lib/settingsLoader';
 import { logger, mongo } from '../utils';
 import { setIndexesOnAllCollections } from './scripts';
