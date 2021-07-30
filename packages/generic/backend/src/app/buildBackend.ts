@@ -1,5 +1,4 @@
-import { settingsType } from '@label/core';
-import { environmentType } from '../lib/environment';
+import { environmentType, settingsType } from '@label/core';
 import { buildRunScript } from './buildRunScript';
 import { buildRunServer } from './buildRunServer';
 import {
