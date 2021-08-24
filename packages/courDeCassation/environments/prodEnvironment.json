@@ -5,9 +5,9 @@
     "db": "10.5.0.5"
   },
   "pathName": {
-    "nlpApi": "http://127.0.0.1",
-    "server": "http://srvanonym",
-    "db": "mongodb://127.0.0.1"
+    "nlpApi": "http://172.16.117.98",
+    "server": "http://shv7-cass",
+    "db": "mongodb://172.16.118.100"
   },
   "port": {
     "nlpApi": 8081,
