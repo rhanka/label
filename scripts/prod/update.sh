@@ -2,7 +2,7 @@
 set -e
 
 echo "Check out prod version"
-git checkout prod
+git checkout add-config-hyper-v
 
 echo "Pull last version"
 git pull
