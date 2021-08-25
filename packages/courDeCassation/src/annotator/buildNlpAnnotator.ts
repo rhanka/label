@@ -4,8 +4,11 @@ import { buildNlpFetcher } from './fetcher';
 
 export { buildNlpAnnotator };
 
-function buildNlpAnnotator(settings: settingsType, environment: environmentType) {
-  const nlpApiBaseUrl = `${environment.pathName.nlpApi}:${environment.port.nlpApi}`
+function buildNlpAnnotator(
+  settings: settingsType,
+  environment: environmentType,
+) {
+  const nlpApiBaseUrl = `${environment.pathName.nlpApi}:${environment.port.nlpApi}`;
   const nlpAnnotatorConfig: annotatorConfigType = {
     name: 'NLP',
     ...buildNlpFetcher(nlpApiBaseUrl),

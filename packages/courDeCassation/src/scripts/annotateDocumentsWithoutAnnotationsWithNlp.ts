@@ -15,7 +15,10 @@ import { parametersHandler } from '../lib/parametersHandler';
   );
 })();
 
-async function annotateDocumentsWithoutAnnotationsWithNlp(settings: settingsType, environment: environmentType) {
+async function annotateDocumentsWithoutAnnotationsWithNlp(
+  settings: settingsType,
+  environment: environmentType,
+) {
   const nlpAnnotator = buildNlpAnnotator(settings, environment);
 
   await nlpAnnotator.annotateDocumentsWithoutAnnotations();

@@ -19,7 +19,10 @@ async function getParameters() {
     encoding: 'utf8',
   });
 
-  return { environment: JSON.parse(environment) as environmentType, settings: settingsModule.lib.parseFromJson(settings) };
+  return {
+    environment: JSON.parse(environment) as environmentType,
+    settings: settingsModule.lib.parseFromJson(settings),
+  };
 }
 
 function getCommandParameters() {

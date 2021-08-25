@@ -9,7 +9,11 @@ const pathToNlpAnnotations = './storage/annotations/';
 function buildNlpLocalApi(): nlpApiType {
   return {
     async fetchNlpAnnotations(settings, document) {
-      const filteredSettings = settingsModule.lib.computeFilteredSettings(settings, document.decisionMetadata.categoriesToOmit, document.decisionMetadata.additionalTermsToAnnotate)
+      const filteredSettings = settingsModule.lib.computeFilteredSettings(
+        settings,
+        document.decisionMetadata.categoriesToOmit,
+        document.decisionMetadata.additionalTermsToAnnotate,
+      );
       const annotations = JSON.parse(
         await fs.readFile(
           `${pathToNlpAnnotations}${document.documentNumber}.json`,
@@ -21,8 +25,10 @@ function buildNlpLocalApi(): nlpApiType {
 
       return {
         ...annotations,
-        entities: annotations.entities.filter(entity =>
-          settingsModule.lib.getCategories(filteredSettings, ['annotable', 'alwaysVisible']).includes(entity.label),
+        entities: annotations.entities.filter((entity) =>
+          settingsModule.lib
+            .getCategories(filteredSettings, ['annotable', 'alwaysVisible'])
+            .includes(entity.label),
         ),
       };
     },
