@@ -2,7 +2,7 @@ import { documentModule, settingsModule } from '@label/core';
 import { buildNlpApi } from './nlpApi';
 
 describe('nlpApi', () => {
-  const nlpApi = buildNlpApi('http://127.0.0.1:8081');
+  const nlpApi = buildNlpApi('http://172.16.117.98');
   it('should fetch the annotations of a given document', async () => {
     const settings = settingsModule.lib.buildSettings({
       personnePhysique: {},
